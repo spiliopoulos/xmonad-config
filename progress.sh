@@ -5,8 +5,7 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-#Remove trailing and leading zeros
-percentage=$(echo $1 | sed '/\./ s/\.\{0,1\}0\{1,\}$//' | sed 's/^0*//')
+percentage=$1
 length=$2
 
 if [[ $(echo "$percentage > 100" | bc) = 1 || $(echo "$percentage < 0" | bc) = 1 ]]
@@ -27,6 +26,8 @@ do
   echo -n " "
 done
 
+#Remove trailing and leading zeros
+percentage=$(echo $1 | sed '/\./ s/\.\{0,1\}0\{1,\}$//' | sed 's/^0*\([1-9]\)/\1/')
 #Print normalized to two significant decimals
 echo "] ($(echo "scale=2; $percentage / 1" | bc)%)"
 
