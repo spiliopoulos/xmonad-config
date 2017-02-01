@@ -9,6 +9,7 @@ Config {
     fgColor = "#ffffff",
     position = Static { xpos = 0, ypos = 0, width = 2560, height = 16 },
     lowerOnStart = True,
+    overrideRedirect = False,
     commands = [
         Run Weather "KPAO" ["-t","<tempF>F <skyCondition>","-L","64","-H","77","-n","#CEFFAC","-h","#FFB6B0","-l","#96CBFE"] 36000,
         Run MultiCpu ["-t","Cpu: <total0> <total1> <total2> <total3>","-L","30","-H","60","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC","-w","3"] 10,

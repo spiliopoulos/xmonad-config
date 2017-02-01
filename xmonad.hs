@@ -28,14 +28,14 @@ import qualified Data.Map        as M
 myTerminal = "/usr/bin/gnome-terminal"
 
 -- The command to lock the screen or show the screensaver.
-myScreensaver = "/usr/bin/gnome-screensaver-command --lock"
+myScreensaver = "xscreensaver-command -lock"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
-mySelectScreenshot = "select-screenshot"
+mySelectScreenshot = "scrot -q 100 -c -s -z"
 
 -- The command to take a fullscreen screenshot.
-myScreenshot = "screenshot"
+myScreenshot = "scrot -q 100 -c -z"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
@@ -122,7 +122,7 @@ xmobarTitleColor = "#FFB6B0"
 xmobarCurrentWorkspaceColor = "#CEFFAC"
 
 -- Width of the window border in pixels.
-myBorderWidth = 1
+myBorderWidth = 2
 
 
 ------------------------------------------------------------------------
@@ -154,7 +154,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      spawn myLauncher)
 
   -- Take a selective screenshot using the command specified by mySelectScreenshot.
-  , ((modMask .|. shiftMask, xK_p),
+  , ((modMask .|. shiftMask, xK_Print),
      spawn mySelectScreenshot)
 
   -- Take a full screenshot using the command specified by myScreenshot.
@@ -163,15 +163,27 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Mute volume.
   , ((modMask .|. controlMask, xK_m),
-     spawn "amixer -q set Master toggle")
+     spawn "pamixer -t")
 
   -- Decrease volume.
   , ((modMask .|. controlMask, xK_j),
-     spawn "amixer -q set Master 10%-")
+     spawn "pamixer -d 5")
 
   -- Increase volume.
   , ((modMask .|. controlMask, xK_k),
-     spawn "amixer -q set Master 10%+")
+     spawn "pamixer -i 5")
+
+  -- Decrease Volume.
+  , ((0, 0x1008FF11),
+     spawn "pamixer -d 5")
+
+  -- Increase Volume.
+  , ((0, 0x1008FF13),
+     spawn "pamixer -u; pamixer -i 5")
+
+  -- Toggle Mute.
+  , ((0, 0x1008FF12),
+     spawn "pamixer -t")
 
   -- Audio previous.
   , ((0, 0x1008FF16),
