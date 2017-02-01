@@ -3,9 +3,9 @@
 mute=$(pamixer --get-mute)
 if $mute
 then
-  echo "Mute"
+  echo 0
 else
   volume=$(pamixer --get-volume)
-  echo  "$volume / 10" | bc
+  echo $volume
 fi
 
