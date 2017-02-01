@@ -19,10 +19,10 @@ tray &
 
 # Start two terminals
 gnome-terminal &
-gnome-terminal &
+#gnome-terminal &
 
 # Start a browser
-google-chrome &
+#google-chrome &
 
 # Start screensaver
 # Kill gnome-screensaver if started by default
@@ -32,4 +32,4 @@ xscreensaver -no-splash &
 # Start sound server
 pulseaudio --start &
 
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
+#exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
